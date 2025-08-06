@@ -276,7 +276,7 @@ task ercc_bowtie2_filter {
 
     ~{bowtie2_invocation}
 
-    # sort bowtie2 outputs for reproducibility 
+    # sort bowtie2 outputs for reproducibility
     samtools sort -n -O sam -@ 8 -o /tmp/bowtie2_ercc.sam /tmp/bowtie2_ercc.sam
 
     # Extract reads [pairs] that did NOT map to the index
@@ -435,7 +435,7 @@ task kallisto {
   # (l = average, s = std dev) get set dynamically based on the input data.
   # See this GitHub comment for more background info:
   # https://github.com/chanzuckerberg/czid-workflows/pull/282#issuecomment-1647494061
-  String kallisto_invocation = "/kallisto/kallisto quant"
+  String kallisto_invocation = "kallisto quant"
       + " -i '${kallisto_idx}' -o $(pwd) --plaintext ${if (paired) then '' else '--single -l 200 -s 20'} ${kallisto_options}"
       + " '~{fastp1_fastq}'" + if (defined(fastp2_fastq)) then " '~{fastp2_fastq}'" else ""
 
@@ -504,8 +504,8 @@ task kallisto {
       **kallisto RNA quantification**
 
       Quantifies host transcripts using [kallisto](https://pachterlab.github.io/kallisto/about).
-      The host transcript sequences are sourced from GENCODE. 
-      Not all CZ ID host species have transcripts indexed, so transcripts are not calculated for all hosts. 
+      The host transcript sequences are sourced from GENCODE.
+      Not all CZ ID host species have transcripts indexed, so transcripts are not calculated for all hosts.
 
       kallisto is run on the fastp-filtered FASTQ(s):
 

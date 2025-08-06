@@ -89,13 +89,22 @@ class PipelineStepDownloadAccessions(PipelineStep):
 
         range_pairs = list(_range_pairs())
         parsed = urlparse(db_s3_path)
-        download_chunks_to_file(
-            parsed.hostname,
-            parsed.path[1:],
-            "raw.fasta",
-            (s for s, _ in range_pairs),
-            (l for _, l in range_pairs),
-        )
+
+        if parsed.scheme == "s3":
+            download_chunks_to_file(
+                parsed.hostname,
+                parsed.path[1:],
+                "raw.fasta",
+                (s for s, _ in range_pairs),
+                (l for _, l in range_pairs),
+            )
+        else:
+            # local file.
+            with open(db_s3_path, "rb") as db_f, open("raw.fasta", "wb") as raw_f:
+                for start, length in range_pairs:
+                    db_f.seek(start)
+                    raw_f.write(db_f.read(length))
+
         with open("raw.fasta") as in_f, open(output_reference_fasta, "w") as out_f:
             for line in in_f:
                 out_f.write(PipelineStepDownloadAccessions._fix_headers(line))

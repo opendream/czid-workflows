@@ -3,9 +3,6 @@ from setuptools import setup, find_packages
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-with open("requirements.txt", "r", encoding="utf-8") as fh:
-    requirements = fh.read().strip().split("\n")
-
 setup(
     name="s3quilt",
     version="2.0.0",
@@ -15,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/chanzuckerberg/czid-workflows",
-    packages=find_packages(),
+    packages=["s3quilt"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
@@ -28,8 +25,8 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
-    python_requires=">=3.7",
-    install_requires=requirements,
+    python_requires=">=3.6",
+    install_requires=[],
     include_package_data=True,
     zip_safe=False,
 )

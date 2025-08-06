@@ -102,7 +102,7 @@ task RunAlignment_minimap2_out {
         )
         CODE
         fi
-        python3 /usr/local/lib/python3.6/dist-packages/idseq_utils/paf2blast6.py gsnap.paf
+        python3 /usr/local/bin/paf2blast6.py gsnap.paf
         mv *frompaf.m8 "gsnap.m8" # TODO: rewrite paf2blast6.py to output in this format
         minimap2-scatter --version > minimap2_version.txt
     >>>
