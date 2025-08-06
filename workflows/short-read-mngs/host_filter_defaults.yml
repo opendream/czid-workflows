@@ -7,5 +7,5 @@ human_bowtie2_index_tar: s3://public-test-bucket-idseq/host_filter/human/2022/bo
 human_hisat2_index_tar: s3://public-test-bucket-idseq/host_filter/human/2022/hisat2_index_tar/GRCh38_ERCC.hisat2.tar
 adapter_fasta: s3://czid-public-references/adapter_sequences/illumina_TruSeq3-PE-2_NexteraPE-PE.fasta
 max_input_fragments: 75000000
-max_subsample_fragments: 1000000
+max_subsample_fragments: 100000000
 s3_wd_uri: ''
