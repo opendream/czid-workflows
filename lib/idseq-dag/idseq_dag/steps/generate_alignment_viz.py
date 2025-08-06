@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqIO.FastaIO import FastaWriter
-from s3quilt import download_chunks
+from idseq_dag.s3quilt import download_chunks
 
 from idseq_dag.engine.pipeline_step import PipelineStep
 from idseq_dag.util.lineage import INVALID_CALL_BASE_ID

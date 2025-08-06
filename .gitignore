@@ -1,8 +1,58 @@
 __pycache__
 pyrightconfig.json
 
+# Python build artifacts
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
 
 # Makefile kludge
 .venv
 .build-*
 .python_dependencies_installed
+
+# IDE files
+.idea/
+
+# Temporary files
+.tmp/
+
+# Library specific ignores
+# Bioinformatics data files (generated/test data)
+lib/**/*.bam
+lib/**/*.fastq
+lib/**/*.fa
+lib/**/*.fasta
+lib/**/*.sam
+
+# Generated outputs
+lib/**/*.pdf
+lib/**/*.csv
+lib/**/*.tsv
+lib/**/*.count
+lib/**/*.description.md
+lib/**/validate_input_summary.json
+lib/**/subsampled_*.fa
+lib/**/dedup*.fastq
+lib/**/hisat2_*.fastq
+lib/**/bowtie2_*.fastq
+lib/**/valid_input*.fastq
+
+# Reference data (large genome indices)
+lib/**/references/host_filter/*.tar
+lib/**/references/host_filter/*.tar.*
+lib/**/references/host_filter/ercc/
+lib/**/references/host_filter/GRCh38*/
+
+# Picard metrics
+lib/**/picard_insert_metrics.txt
+lib/**/insert_size_histogram.pdf
+
+# Test artifacts
+lib/**/test_output/
+lib/**/tmp/

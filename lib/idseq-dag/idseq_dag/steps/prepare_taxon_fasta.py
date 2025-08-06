@@ -6,7 +6,7 @@ import idseq_dag.util.command as command
 import idseq_dag.util.command_patterns as command_patterns
 import idseq_dag.util.s3 as s3
 import idseq_dag.util.count as count
-from s3quilt import download_chunks_to_file
+from idseq_dag.s3quilt import download_chunks_to_file
 
 class PipelineStepPrepareTaxonFasta(PipelineStep):
     '''

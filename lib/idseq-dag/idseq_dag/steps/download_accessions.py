@@ -5,7 +5,7 @@ import idseq_dag.util.s3 as s3
 import idseq_dag.util.m8 as m8
 
 from idseq_dag.util.dict import open_file_db_by_extension
-from s3quilt import download_chunks_to_file
+from idseq_dag.s3quilt import download_chunks_to_file
 
 MAX_ACCESSION_SEQUENCE_LEN = 100000000
 ALLOW_S3MI = False  # Allow s3mi only if running on an instance with enough RAM to fit NT and NR together...
