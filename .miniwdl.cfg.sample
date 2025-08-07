@@ -1,0 +1,24 @@
+# MinWDL configuration for czid-workflows
+# This fixes the "Unable to locate credentials" error in production
+#
+# Usage options:
+#   1. Copy to ~/.config/miniwdl.cfg (global)
+#   2. Use --cfg flag: miniwdl run --cfg .miniwdl.cfg.sample ...
+#   3. Set environment: MINIWDL_CFG=.miniwdl.cfg.sample miniwdl run ...
+
+[download_awscli]
+# Pass AWS credentials from host to Docker containers for S3 access
+# This resolves the fallback to --no-sign-request which causes 12-15 second delays
+host_credentials = true
+
+[task_runtime]
+# Pass through AWS environment variables to all tasks
+# Set to null to inherit from host environment
+env = {
+    "AWS_ACCESS_KEY_ID": null,
+    "AWS_SECRET_ACCESS_KEY": null,
+    "AWS_SESSION_TOKEN": null,
+    "AWS_DEFAULT_REGION": null,
+    "AWS_REGION": null,
+    "AWS_PROFILE": null
+}
