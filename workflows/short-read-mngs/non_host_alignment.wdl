@@ -78,6 +78,7 @@ task RunAlignment_minimap2_out {
         File? local_minimap2_index 
         String prefix
         String minimap2_wdl_version
+        Int num_threads = 16
     }
 
     command <<<
@@ -85,7 +86,7 @@ task RunAlignment_minimap2_out {
         set -euxo pipefail
 
         if [[ "~{run_locally}" == true ]]; then
-          minimap2-scatter ~{minimap2_args} "~{local_minimap2_index}" "~{sep=' ' fastas}" > "~{prefix}.paf"
+          minimap2-scatter ~{minimap2_args} "~{local_minimap2_index}" "~{sep=' ' fastas}" > "~{prefix}.paf" -t "~{num_threads}"
         else
           python3 <<CODE
         import os
@@ -114,6 +115,7 @@ task RunAlignment_minimap2_out {
 
     runtime {
         docker: docker_image_id
+        cpu: num_threads
     }
 }
 task RunAlignment_diamond_out {
@@ -127,6 +129,7 @@ task RunAlignment_diamond_out {
         File? local_diamond_index
         String prefix
         String diamond_wdl_version
+        Int num_threads = 16
     }
 
     command <<<
@@ -134,7 +137,7 @@ task RunAlignment_diamond_out {
         set -euxo pipefail  
         if [[ "~{run_locally}" == true ]]; then 
           diamond makedb --in "~{local_diamond_index}" -d reference
-          diamond blastx -d reference -q "~{sep=' ' fastas}" -o "rapsearch2.m8" "~{diamond_args}"
+          diamond blastx -d reference -q "~{sep=' ' fastas}" -o "rapsearch2.m8" "~{diamond_args}" --threads "~{num_threads}"
         else
           python3 <<CODE
         import os 
@@ -161,6 +164,7 @@ task RunAlignment_diamond_out {
 
     runtime {
         docker: docker_image_id
+        cpu: num_threads
     }
 }
 
